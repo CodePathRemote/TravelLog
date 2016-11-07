@@ -7,36 +7,44 @@ Time spent: **X** hours spent in total
 ## User Stories
 
 The following **required** functionality is completed:
-
+* [ ] When our app is initialized and in the loading stage, a **logo screen** will be shown to user before redirected to login page. 
 * [ ]	User can **sign in to Facebook** using OAuth login
-* [ ]	User can **view trips from their home timeline**
-  * [ ] User is displayed the trip title, status and participants for each trip
-  * [ ] User can view more trips as they scroll with [infinite pagination](http://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView). Number of trips is unlimited.
-* [ ]   User can also switch to **view trips shared by their friends**
-  * [ ] User should be able to click into the trip and see a summary of the trip.
-  * [ ] User should NOT be allowed to edit anything on their friends trip.
+* [ ]	User can **view map view of the current trip** after user login
+  * [ ] User is displayed with the map view of the most recently created trip.
+  * [ ] User is given a bottom navigation bar which can direct the user to most frequently used pages like Photos, Notes, Budget and CarService.
+  * [ ] User is given links to other pages by click the hamburger botton at top navigation bar.
+  * [ ] User is given a floating action bar to share the trip.
+* [ ] User can **take photos** at photo taken page.
+  * [ ] User should be given the choice of save or cancel the taken photo.
+  * [ ] The photo should be pined at the map based on the location info stored.
+* [ ] User can **take notes** at notes taken page.
+  * [ ] User should be given the choice of save or cancel the notes.
+  * [ ] The user should be able to edit the saved notes at anytime.
+* [ ] User can **put down expenses** at budget page.
+  * [ ] User should be able to put down the amount and category of the expense.
+  * [ ] The app will help user track the total expense for each trip.
 * [ ] User can **create a new trip**
-  * [ ] User can click a “Start” icon in the Action Bar on the top right
-  * [ ] User can then enter when to start and end the trip, who will attend and add a title for the trip
-  * [ ] User is taken to a new trip page with a list of days generated base on how long this trip will take.
-  * [ ] User can click into each day to fill the detail of the trip like the place to go, the things to do.
-  * [ ] User can always eidt the time(add and remove days from new trip page) and participants of this trip.
-* [ ]  User can "publish" their trip so the trip is visible for their friend.
+  * [ ] User can enter the total days of trip.
+  * [ ] User can enter one trip destination address.
+  * [ ] User can enter the participants of the trip.
+  * [ ] User is redirected back to the map view after the trip is created.
+  * [ ] User can always eidt the time, destination and participants of the trip.
+* [ ] User can **view/edit** their own profile.
 
 The following **optional** features are implemented:
 
-* [ ] User can **Add photos to their daily trip detail** on each day's page of the trip
-* [ ] User can **View the destination on the map**
-* [ ] User can Share their locations on the map
+* [ ] The main **map view** is auto scoped based on the activities(photos, pins) of the user.
+* [ ] User can "share" their trips to their facebook friends. The sharee can view the trips shared to him/her.
+* [ ] User can **pin multiple locations** for each trip.
+* [ ] User can **View** the trip participants' profile if they are friends on facebook.
 
 The following **bonus** features are implemented:
 
-* [ ] User can view the local cached trip lists when internet connect is unavailable
+* [ ] User can view the local cached trip map view when internet connect is unavailable
 
 The following **additional** features are implemented:
 
-* [ ] User can upload .pdf file to their trips.
-* [ ] User can "look around" on the app to find the user close to them and make friend request.
+* [ ] To be decided.
 
 ## Video Walkthrough
 
