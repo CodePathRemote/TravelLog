@@ -30,6 +30,7 @@ The following **required** functionality is completed:
   * [ ] User is redirected back to the map view after the trip is created.
   * [ ] User can always eidt the time, destination and participants of the trip.
 * [ ] User can **view/edit** their own profile.
+* [ ] User can **view all the existing trips** created in the view trips page. 
 
 The following **optional** features are implemented:
 
