@@ -2,6 +2,8 @@
 
 **TravelLog** is an android app that allows a user to plan, track and share his/her trip. It is not just a tool for better trip planning, but an album for your best memory.
 
+**WireFrames** https://github.com/CodePathRemote/TravelLog/tree/master/wireframes
+
 Time spent: **X** hours spent in total
 
 ## User Stories
