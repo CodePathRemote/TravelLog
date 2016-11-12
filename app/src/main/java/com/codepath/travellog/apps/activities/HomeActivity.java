@@ -95,7 +95,7 @@ public class HomeActivity extends AppCompatActivity implements
         // Display the connection status
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location != null) {
-            setMarker(location);
+            setMarker(location, "Hello there!");
             //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
@@ -106,8 +106,7 @@ public class HomeActivity extends AppCompatActivity implements
         startLocationUpdates();
     }
 
-    public void setMarker(Location location){
-        String title = "Hello there!";
+    public void setMarker(Location location, String title){
         BitmapDescriptor icon = MapUtils.createBubble(HomeActivity.this, IconGenerator.STYLE_GREEN, title);
         //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
         LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
