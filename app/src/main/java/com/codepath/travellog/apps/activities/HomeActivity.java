@@ -24,10 +24,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.location.LocationListener;
+
 import android.support.v4.app.FragmentActivity;
 
 import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
 
+@RuntimePermissions
 public class HomeActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -66,15 +69,14 @@ public class HomeActivity extends AppCompatActivity implements
 
     }
 
-
     protected void loadMap(GoogleMap googleMap) {
         map = googleMap;
         if (map != null) {
             // Map is ready
-            Toast.makeText(this, "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
-            //MapDemoActivityPermissionsDispatcher.getMyLocationWithCheck(this);
+            //Toast.makeText(this, "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
+            HomeActivityPermissionsDispatcher.getMyLocationWithCheck(this);
         } else {
-            Toast.makeText(this, "Error - Map was null!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error - Failed to load Map", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -89,12 +91,12 @@ public class HomeActivity extends AppCompatActivity implements
         // Display the connection status
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location != null) {
-            Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
             map.animateCamera(cameraUpdate);
         } else {
-            Toast.makeText(this, "Current location was null, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No current location, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
         }
         startLocationUpdates();
     }
@@ -123,7 +125,7 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
     /*
-	 * Called by Location Services if the attempt to Location Services fails.
+     * Called by Location Services if the attempt to Location Services fails.
 	 */
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
@@ -156,14 +158,14 @@ public class HomeActivity extends AppCompatActivity implements
         String msg = "Updated Location: " +
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //MapDemoActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+        HomeActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
     }
 
     @SuppressWarnings("all")
@@ -176,7 +178,7 @@ public class HomeActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this).build();
-           connectClient();
+            connectClient();
         }
     }
 
@@ -237,7 +239,6 @@ public class HomeActivity extends AppCompatActivity implements
             return mDialog;
         }
     }
-
 
 
 }
