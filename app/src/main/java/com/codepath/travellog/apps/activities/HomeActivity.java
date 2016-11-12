@@ -12,9 +12,11 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.codepath.travellog.R;
+import com.codepath.travellog.apps.utils.MapUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
@@ -22,10 +24,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.location.LocationListener;
-
-import android.support.v4.app.FragmentActivity;
+import com.google.android.gms.maps.model.Marker;
+import com.google.maps.android.ui.IconGenerator;
 
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
@@ -67,7 +69,9 @@ public class HomeActivity extends AppCompatActivity implements
             Toast.makeText(this, "Error - Map Fragment was null!!", Toast.LENGTH_SHORT).show();
         }
 
+
     }
+
 
     protected void loadMap(GoogleMap googleMap) {
         map = googleMap;
@@ -75,13 +79,13 @@ public class HomeActivity extends AppCompatActivity implements
             // Map is ready
             //Toast.makeText(this, "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
             HomeActivityPermissionsDispatcher.getMyLocationWithCheck(this);
+
         } else {
             Toast.makeText(this, "Error - Failed to load Map", Toast.LENGTH_SHORT).show();
         }
     }
 
-
-    /*
+          /*
            * Called by Location Services when the request to connect the client
            * finishes successfully. At this point, you can request the current
            * location or start periodic updates
@@ -91,6 +95,7 @@ public class HomeActivity extends AppCompatActivity implements
         // Display the connection status
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location != null) {
+            setMarker(location);
             //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
@@ -99,6 +104,17 @@ public class HomeActivity extends AppCompatActivity implements
             Toast.makeText(this, "No current location, enable GPS on emulator!", Toast.LENGTH_SHORT).show();
         }
         startLocationUpdates();
+    }
+
+    public void setMarker(Location location){
+        String title = "Hello there!";
+        BitmapDescriptor icon = MapUtils.createBubble(HomeActivity.this, IconGenerator.STYLE_GREEN, title);
+        //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
+        LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
+
+        Marker marker = MapUtils.addMarker(map, point, title, icon);
+        MapUtils.dropPinEffect(marker);
+
     }
 
 
