@@ -9,4 +9,10 @@
     <string name="map">Map</string>
     <string name="my_trips">My Trips</string>
     <string name="my_profile">My Profile</string>
+
+    <!-- Make them equal length for evenly display -->
+    <string name="take_photo">Photo&#160;&#160;&#160;&#160;&#160;&#160;</string>
+    <string name="take_note">Note&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
+    <string name="take_budget">Budget&#160;&#160;&#160;&#160;&#160;</string>
+    <string name="take_car_service">Car Service</string>
 </resources>

@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.codepath.travellog.R;
 import com.codepath.travellog.apps.fragments.MapsFragment;
@@ -18,6 +19,7 @@ import com.codepath.travellog.apps.fragments.ProfileFragment;
 public class HomeActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private Toolbar toolbarBottom;
     private MapsFragment mapsFragment;
 
     private DrawerLayout mDrawer;
@@ -44,6 +46,18 @@ public class HomeActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, new MapsFragment()).commit();
         setTitle(R.string.app_name);
+
+        toolbarBottom = (Toolbar) findViewById(R.id.toolbar_bottom);
+        toolbarBottom.inflateMenu(R.menu.bottom_toolbar_menu);
+        toolbarBottom.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if(item.getItemId() == R.id.photo) {
+                    Toast.makeText(getApplicationContext(), "photo", Toast.LENGTH_LONG).show();
+                }
+                return false;
+            }
+        });
 
         /**
          * created a hook to the fragment so that you can invoke methods on it from the activity
@@ -136,9 +150,4 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
 }
