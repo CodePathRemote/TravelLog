@@ -2,6 +2,7 @@ package com.codepath.travellog.apps.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.SystemClock;
 import android.view.animation.BounceInterpolator;
 
@@ -24,6 +25,13 @@ public class MapUtils {
         iconGenerator.setStyle(style);
         Bitmap bitmap = iconGenerator.makeIcon(title);
         BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(bitmap);
+        return bitmapDescriptor;
+    }
+
+    public static BitmapDescriptor createPictureBubble(Context context, String filePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 100, 150, true);
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(scaledBitmap);
         return bitmapDescriptor;
     }
 
