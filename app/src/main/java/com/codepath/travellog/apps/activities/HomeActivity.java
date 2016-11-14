@@ -1,5 +1,6 @@
 package com.codepath.travellog.apps.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -55,6 +56,9 @@ public class HomeActivity extends AppCompatActivity {
                 if(item.getItemId() == R.id.photo) {
                     Toast.makeText(getApplicationContext(), "photo", Toast.LENGTH_LONG).show();
                 }
+                if (item.getItemId() == R.id.notes) {
+                    openNotes();
+                }
                 return false;
             }
         });
@@ -68,6 +72,12 @@ public class HomeActivity extends AppCompatActivity {
             mapsFragment = (MapsFragment) getSupportFragmentManager().findFragmentById(R.id.child_fragment_container);
         }
 
+    }
+
+    private void openNotes() {
+        Intent i = new Intent(this, NotesActivity.class);
+        //startActivityForResult(i, SETTINGS_RESULT);
+        HomeActivity.this.startActivity(i);
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {

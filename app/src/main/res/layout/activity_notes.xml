@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_notes"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.codepath.travellog.apps.activities.NotesActivity">
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:clickable="true"
+            android:src="@mipmap/close" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="              Trip Plan and Notes"
+            android:id="@+id/NotesTitle"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp"
+            android:layout_toRightOf="@+id/ivClose"
+            android:gravity="center_vertical"
+            android:layout_above="@+id/etNotes" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etNotes"
+            android:hint="@string/whats_the_plan"
+            android:textColorHint="#C0C0C0"
+            android:inputType="textMultiLine|textCapSentences"
+            android:lineSpacingMultiplier="1.1"
+            android:layout_below="@+id/line1"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@+id/btnSave"
+            android:gravity="top"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:minHeight="1px"
+            android:background="@color/colorPrimary"
+            android:layout_below="@+id/ivClose" />
+
+        <View
+            android:id="@+id/coverTheTealDividerICantGetRidOf"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_above="@id/btnSave"
+            android:background="#FFFFFF" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:minHeight="1px"
+            android:layout_above="@id/btnSave"
+            android:layout_marginBottom="12dp"
+            android:background="@color/colorPrimary" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:id="@+id/btnSave"
+            android:layout_marginRight="12dp"
+            android:layout_above="@+id/becauseTheDialogIgnoresBottomMarginOnTheButton"
+            android:background="@color/colorAccent"
+            android:textColor="#ffffff"
+            android:layout_alignParentRight="true" />
+
+        <View
+            android:id="@+id/becauseTheDialogIgnoresBottomMarginOnTheButton"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="12dp"
+            android:background="#FFFFFF" />
+
+
+
+
+</RelativeLayout>
