@@ -11,16 +11,16 @@ Time spent: **X** hours spent in total
 The following **required** functionality is completed:
 * [ ] When our app is initialized and in the loading stage, a **logo screen** will be shown to user before redirected to login page. 
 * [ ]	User can **sign in to Facebook** using OAuth login
-* [ ]	User can **view map view of the current trip** after user login
-  * [ ] User is displayed with the map view of the current trip.
-  * [ ] User is given a bottom navigation bar which displays the main functionalities such as taking Photos and Notes, tracking Budget and using a CarService (More on them in the next sections)
-  * [ ] User is given links to other functionalities by clicking the hamburger button at top navigation bar.
+* [X]	User can **view map view of the current trip** after user login
+  * [X] User is displayed with the map view of the current trip.
+  * [X] User is given a bottom navigation bar which displays the main functionalities such as taking Photos and Notes, tracking Budget and using a CarService (More on them in the next sections)
+  * [X] User is given links to other functionalities by clicking the hamburger button at top navigation bar.
   * [ ] User is given a floating action button to share the trip details
-* [ ] User can **take photos** on the take photo screen
-  * [ ] User should be given the choice of save or cancel the taken photo.
-  * [ ] The photo should be pined at the map based on the location info.
-* [ ] User can **take notes** on the take notes screen
-  * [ ] User should be given the choice of save or cancel the notes.
+* [X] User can **take photos** on the take photo screen
+  * [X] User should be given the choice of save or cancel the taken photo.
+  * [X] The photo should be pined at the map based on the location info.
+* [X] User can **take notes** on the take notes screen
+  * [X] User should be given the choice of save or cancel the notes.
   * [ ] The user should be able to edit the saved notes at anytime.
 * [ ] User can **record expenses** on the budget screen.
   * [ ] User should be able to put down the amount and category of the expense.
