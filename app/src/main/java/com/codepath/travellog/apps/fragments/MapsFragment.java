@@ -131,6 +131,17 @@ public class MapsFragment extends Fragment implements
 
     }
 
+    public void setPictureMarker(String title, String photoFilePath){
+        BitmapDescriptor icon = MapUtils.createPictureBubble(getActivity(), photoFilePath);
+        //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
+
+        Marker marker = MapUtils.addMarker(map, point, title, icon);
+        MapUtils.dropPinEffect(marker);
+
+    }
+
 
     protected void startLocationUpdates() {
         mLocationRequest = new LocationRequest();
