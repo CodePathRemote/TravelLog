@@ -16,7 +16,7 @@ public class NotesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notes);
 
         ivClose = (ImageView) findViewById(R.id.ivClose);
-        
+
 
 
     }
