@@ -21,17 +21,15 @@ The following **required** functionality is completed:
   * [X] The photo should be pined at the map based on the location info.
 * [X] User can **take notes** on the take notes screen
   * [X] User should be given the choice of save or cancel the notes.
-  * [ ] The user should be able to edit the saved notes at anytime.
+  * [ ] The note should be pined at the map based on the location info.
 * [ ] User can **record expenses** on the budget screen.
   * [ ] User should be able to put down the amount and category of the expense.
   * [ ] Date of expense should be automatically added
   * [ ] The app will help user track the total expense for each trip.
 * [ ] User can **create a new trip**
-  * [ ] User can enter the total days of trip.
-  * [ ] User can enter one trip destination address.
-  * [ ] User can enter the participants of the trip.
-  * [ ] User is redirected back to the map view after the trip is created.
-  * [ ] User can always edit the time, destination and participants of the trip.
+  * [ ] User can enter start and end date
+  * [ ] User can enter name for the trip
+  * [ ] User can always edit the trip information
 * [ ] User can **view/edit** their own profile.
 * [ ] User can **view all the existing trips** created in the view trips page. 
 
