@@ -15,10 +15,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.codepath.travellog.R;
+import com.codepath.travellog.apps.aplications.TravelLogApplication;
 import com.codepath.travellog.apps.fragments.MapsFragment;
 import com.codepath.travellog.apps.fragments.ProfileFragment;
 import com.codepath.travellog.apps.utils.PhotoUtils;
+
+import java.io.File;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -31,6 +35,8 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+
+    private TransferUtility transferClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +183,7 @@ public class HomeActivity extends AppCompatActivity {
                 if (mapsFragment == null) {
                     mapsFragment = (MapsFragment) getSupportFragmentManager().findFragmentByTag("MapFragment");
                 }
+                TravelLogApplication.getTransferClient().uploadFile(takenPhotoUri.getPath(), new File(takenPhotoUri.getPath()));
                 mapsFragment.setPictureMarker("title", takenPhotoUri.getPath());
                 Toast.makeText(this, takenPhotoUri.toString(), Toast.LENGTH_LONG).show();
             }

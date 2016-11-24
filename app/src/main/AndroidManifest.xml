@@ -22,6 +22,7 @@
         android:required="true" />
 
     <application
+        android:name=".apps.aplications.TravelLogApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -45,9 +46,16 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
 
         <activity android:name=".apps.activities.PhotoActivity" />
         <activity android:name=".apps.activities.NotesActivity"></activity>
+
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
     </application>
 
 </manifest>
