@@ -1,25 +1,29 @@
 {
   "project_info": {
-    "project_number": "506110362477",
-    "firebase_url": "https://travellog-a0b71.firebaseio.com",
-    "project_id": "travellog-a0b71",
-    "storage_bucket": "travellog-a0b71.appspot.com"
+    "project_number": "620507743036",
+    "firebase_url": "https://my-project-1478752187590.firebaseio.com",
+    "project_id": "my-project-1478752187590",
+    "storage_bucket": "my-project-1478752187590.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:506110362477:android:4d26bf68e48cfe11",
+        "mobilesdk_app_id": "1:620507743036:android:4d26bf68e48cfe11",
         "android_client_info": {
           "package_name": "com.codepath.travellog"
         }
       },
       "oauth_client": [
         {
-          "client_id": "506110362477-clulehj1h4gdafa0uvbpe1lmeb3iq6o3.apps.googleusercontent.com",
+          "client_id": "620507743036-8g68ekvbrleqjhrns462fej41a8n7qii.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
-      "api_key": [{ "current_key": "" }],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQbliDfCZcQe1u6P0CTQSdJjqpLBGc3_o"
+        }
+      ],
       "services": {
         "analytics_service": {
           "status": 1

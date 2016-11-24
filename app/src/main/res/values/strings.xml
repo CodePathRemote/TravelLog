@@ -15,4 +15,7 @@
     <string name="take_note">Note&#160;&#160;&#160;&#160;&#160;&#160;&#160;</string>
     <string name="take_budget">Budget&#160;&#160;&#160;&#160;&#160;</string>
     <string name="take_car_service">Car Service</string>
+    <string name="facebook_app_id">1143959738986820</string>
+    <string name="fb_login_protocol_scheme">fb1143959738986820</string>
+
 </resources>
