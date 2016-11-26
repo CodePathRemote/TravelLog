@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,9 +17,21 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.codepath.travellog.R;
+import com.codepath.travellog.apps.fragments.LoginFragment;
 import com.codepath.travellog.apps.fragments.MapsFragment;
-import com.codepath.travellog.apps.fragments.ProfileFragment;
 import com.codepath.travellog.apps.utils.PhotoUtils;
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -31,6 +44,8 @@ public class HomeActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+
+    FirebaseStorage storage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +63,18 @@ public class HomeActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        // AppEventsLogger.activateApp(this);
+
+        storage = FirebaseStorage.getInstance();
+
         nvDrawer.getMenu().getItem(0).setChecked(true);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, new MapsFragment(), "MapFragment").commit();
+      //  if(AccessToken.getCurrentAccessToken() != null) {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new MapsFragment(), "MapFragment").commit();
+       // } else {
+       //     fragmentManager.beginTransaction().replace(R.id.flContent, new LoginFragment(), "LoginFragment").commit();
+        //}
         setTitle(R.string.app_name);
 
         toolbarBottom = (Toolbar) findViewById(R.id.toolbar_bottom);
@@ -58,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
         toolbarBottom.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                if(!isUserSignedIn()) {return false;}
                 if(item.getItemId() == R.id.photo) {
                     String photoFileName = PhotoUtils.generatePhotoFileName();
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -113,6 +138,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        if(!isUserSignedIn()) {return false;}
                         selectDrawerItem(menuItem);
                         return true;
                     }
@@ -133,7 +159,7 @@ public class HomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.profile:
-                fragmentClass = ProfileFragment.class;
+                fragmentClass = LoginFragment.class;
                 break;
             default:
                 fragmentClass = MapsFragment.class;
@@ -168,16 +194,49 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public boolean isUserSignedIn() {
+        return (AccessToken.getCurrentAccessToken() != null);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if(resultCode == RESULT_OK) {
-                Uri takenPhotoUri = PhotoUtils.getPhotoFileUri(PhotoUtils.generatePhotoFileName());
+                String photoName = PhotoUtils.generatePhotoFileName();
+                Uri takenPhotoUri = PhotoUtils.getPhotoFileUri(photoName);
                 // Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
                 if (mapsFragment == null) {
                     mapsFragment = (MapsFragment) getSupportFragmentManager().findFragmentByTag("MapFragment");
                 }
+                // Create a storage reference from our app
+                StorageReference storageRef = storage.getReferenceFromUrl("gs://my-project-1478752187590.appspot.com");
+                StorageReference mountainImagesRef = storageRef.child("images/" + photoName);
+                try {
+                    InputStream stream = new FileInputStream(new File(takenPhotoUri.getPath()));
+                    UploadTask uploadTask = mountainImagesRef.putStream(stream);
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            String haha = "test";
+                            final int length = haha.length();
+                            // Handle unsuccessful uploads
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        }
+                    });
+
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
                 mapsFragment.setPictureMarker("title", takenPhotoUri.getPath());
+
                 Toast.makeText(this, takenPhotoUri.toString(), Toast.LENGTH_LONG).show();
             }
         }
