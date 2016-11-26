@@ -73,9 +73,6 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-      //  mAuth.signOut();
-     //   LoginManager.getInstance().logOut();
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -87,9 +84,6 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // [START_EXCLUDE]
-               // updateUI(user);
-                // [END_EXCLUDE]
             }
         };
 
@@ -152,9 +146,6 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
-        // [START_EXCLUDE silent]
-        //showProgressDialog();
-        // [END_EXCLUDE]
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
@@ -172,9 +163,6 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // [START_EXCLUDE]
-                        //hideProgressDialog();
-                        // [END_EXCLUDE]
                     }
                 });
     }
@@ -182,8 +170,6 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
     public void signOut() {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
-
-        //updateUI(null);
     }
 
     @Override

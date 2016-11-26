@@ -20,6 +20,7 @@ import com.codepath.travellog.R;
 import com.codepath.travellog.apps.fragments.LoginFragment;
 import com.codepath.travellog.apps.fragments.MapsFragment;
 import com.codepath.travellog.apps.utils.PhotoUtils;
+import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -81,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
         toolbarBottom.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                if(!isUserSignedIn()) {return false;}
                 if(item.getItemId() == R.id.photo) {
                     String photoFileName = PhotoUtils.generatePhotoFileName();
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -136,6 +138,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        if(!isUserSignedIn()) {return false;}
                         selectDrawerItem(menuItem);
                         return true;
                     }
@@ -189,6 +192,10 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean isUserSignedIn() {
+        return (AccessToken.getCurrentAccessToken() != null);
     }
 
     @Override
