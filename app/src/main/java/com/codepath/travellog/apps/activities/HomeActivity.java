@@ -20,7 +20,6 @@ import com.codepath.travellog.R;
 import com.codepath.travellog.apps.fragments.LoginFragment;
 import com.codepath.travellog.apps.fragments.MapsFragment;
 import com.codepath.travellog.apps.utils.PhotoUtils;
-import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -70,11 +69,11 @@ public class HomeActivity extends AppCompatActivity {
 
         nvDrawer.getMenu().getItem(0).setChecked(true);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        if(AccessToken.getCurrentAccessToken() != null) {
+      //  if(AccessToken.getCurrentAccessToken() != null) {
             fragmentManager.beginTransaction().replace(R.id.flContent, new MapsFragment(), "MapFragment").commit();
-        } else {
-            fragmentManager.beginTransaction().replace(R.id.flContent, new LoginFragment(), "LoginFragment").commit();
-        }
+       // } else {
+       //     fragmentManager.beginTransaction().replace(R.id.flContent, new LoginFragment(), "LoginFragment").commit();
+        //}
         setTitle(R.string.app_name);
 
         toolbarBottom = (Toolbar) findViewById(R.id.toolbar_bottom);
@@ -229,10 +228,7 @@ public class HomeActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
                 mapsFragment.setPictureMarker("title", takenPhotoUri.getPath());
-
-
 
                 Toast.makeText(this, takenPhotoUri.toString(), Toast.LENGTH_LONG).show();
             }

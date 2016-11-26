@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.codepath.travellog.R;
+import com.codepath.travellog.apps.activities.HomeActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -27,8 +27,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by vmiha on 11/20/16.
@@ -45,10 +43,8 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager,
@@ -59,8 +55,9 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
                         Log.d("Success login", "facebook:onSuccess:" + loginResult);
                         handleFacebookAccessToken(loginResult.getAccessToken());
 
+                        Intent i = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(i);
                     }
-
 
                     @Override
                     public void onCancel() {
@@ -181,7 +178,6 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
                     }
                 });
     }
-    // [END auth_with_facebook]
 
     public void signOut() {
         mAuth.signOut();
