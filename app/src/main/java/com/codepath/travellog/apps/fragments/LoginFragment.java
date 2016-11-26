@@ -48,6 +48,32 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
 
         super.onCreate(savedInstanceState);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+
+                        Log.d("Success login", "facebook:onSuccess:" + loginResult);
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+
+                    }
+
+
+                    @Override
+                    public void onCancel() {
+                        Log.d("Cancel Login", "facebook:onCancel");
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Log.d("Login error", "facebook:onError" + exception.getMessage());
+
+                    }
+                });
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
       //  mAuth.signOut();
@@ -92,15 +118,13 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
         //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
 
         LoginButton loginButton = (LoginButton) view.findViewById(R.id.login_button);
         loginButton.setReadPermissions("email", "public_profile");
         // If using in a fragment
         loginButton.setFragment(this);
-        callbackManager = CallbackManager.Factory.create();
 
-        // Callback registration
+   /*     // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -124,6 +148,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
                 // App code
             }
         });
+        */
 
         return view;
     }
