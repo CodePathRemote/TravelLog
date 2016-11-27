@@ -3,6 +3,7 @@ package com.codepath.travellog.apps.fragments;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.IntentSender;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -109,7 +110,7 @@ public class MapsFragment extends Fragment implements
         // Display the connection status
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (location != null) {
-            setMarker("Hello there!");
+           // setMarker("Hello there!");
             //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 17);
@@ -142,6 +143,16 @@ public class MapsFragment extends Fragment implements
 
     }
 
+    public void setPictureMarker(String title, Bitmap bitmap){
+        BitmapDescriptor icon = MapUtils.createPictureBubble(getActivity(), bitmap);
+        //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
+
+        Marker marker = MapUtils.addMarker(map, point, title, icon);
+        MapUtils.dropPinEffect(marker);
+
+    }
 
     protected void startLocationUpdates() {
         mLocationRequest = new LocationRequest();

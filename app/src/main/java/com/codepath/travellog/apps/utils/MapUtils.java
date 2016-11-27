@@ -35,6 +35,12 @@ public class MapUtils {
         return bitmapDescriptor;
     }
 
+    public static BitmapDescriptor createPictureBubble(Context context, Bitmap bitmap) {
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, 90, 90, true);
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromBitmap(scaledBitmap);
+        return bitmapDescriptor;
+    }
+
     public static Marker addMarker(GoogleMap map, LatLng point, String title,
                                    BitmapDescriptor icon) {
 
