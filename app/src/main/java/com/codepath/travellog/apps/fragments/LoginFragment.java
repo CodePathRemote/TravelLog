@@ -1,5 +1,6 @@
 package com.codepath.travellog.apps.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.codepath.travellog.R;
 import com.codepath.travellog.apps.activities.HomeActivity;
+import com.codepath.travellog.apps.activities.LoginActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -38,6 +40,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private onLoginUpdatedListener onLoginUpdatedListener;
 
     CallbackManager callbackManager;
 
@@ -80,6 +83,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    onLoginUpdatedListener.saveLoginInfo(user);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -87,6 +91,18 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
             }
         };
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof LoginActivity) {
+            try {
+                onLoginUpdatedListener = (onLoginUpdatedListener) context;
+            } catch (ClassCastException e) {
+                throw new ClassCastException(context.toString() + "is not main activity");
+            }
+        }
     }
 
     @Override
@@ -178,10 +194,12 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-
-
     @Override
     public void onClick(View view) {
 
+    }
+
+    public interface onLoginUpdatedListener {
+        public void saveLoginInfo(FirebaseUser user);
     }
 }

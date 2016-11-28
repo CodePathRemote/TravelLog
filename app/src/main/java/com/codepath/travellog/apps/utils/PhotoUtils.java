@@ -23,8 +23,8 @@ public class PhotoUtils {
         return Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + photoFileName));
     }
 
-    public static String generatePhotoFileName() {
-        return "photo.jpg";
+    public static String generatePhotoFileName(String userId) {
+        return userId + "_photo.jpg";
     }
 
 }

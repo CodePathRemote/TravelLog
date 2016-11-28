@@ -75,7 +75,7 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 if(!isUserSignedIn()) {return false;}
                 if(item.getItemId() == R.id.photo) {
-                    String photoFileName = PhotoUtils.generatePhotoFileName();
+                    String photoFileName = PhotoUtils.generatePhotoFileName(getUserName());
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, PhotoUtils.getPhotoFileUri(photoFileName));
                     startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
@@ -198,7 +198,8 @@ public class HomeActivity extends AppCompatActivity {
                 if (mapsFragment == null) {
                     mapsFragment = (MapsFragment) getSupportFragmentManager().findFragmentByTag("MapFragment");
                 }
-                String photoName = PhotoUtils.generatePhotoFileName();
+
+                String photoName = PhotoUtils.generatePhotoFileName(getUserName());
                 Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_map);
 
                 mapsFragment.setPictureMarker(photoName, b);
@@ -209,5 +210,9 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, photoName, Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    private String getUserName() {
+        return getSharedPreferences("Login", 0).getString("UserId", "");
     }
 }

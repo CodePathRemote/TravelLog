@@ -1,14 +1,17 @@
 package com.codepath.travellog.apps.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.codepath.travellog.R;
+import com.codepath.travellog.apps.fragments.LoginFragment;
 import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
+import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginFragment.onLoginUpdatedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,5 +27,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void saveLoginInfo(FirebaseUser user) {
+        SharedPreferences userInfo = getSharedPreferences("Login", 0);
+        SharedPreferences.Editor editor = userInfo.edit();
+        editor.putString("UserId", user.getUid());
+        editor.putString("UserName", user.getDisplayName());
+        editor.commit();
+    }
 
 }
