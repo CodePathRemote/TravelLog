@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.codepath.travellog.R;
+import com.codepath.travellog.apps.clients.FirebaseClient;
 import com.codepath.travellog.apps.utils.MapUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -46,7 +48,8 @@ import permissions.dispatcher.RuntimePermissions;
 public class MapsFragment extends Fragment implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,
+        GoogleMap.OnMarkerClickListener{
 
     private SupportMapFragment mapFragment;
     private GoogleMap map;
@@ -89,6 +92,7 @@ public class MapsFragment extends Fragment implements
             // Map is ready
             //Toast.makeText(this, "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
             MapsFragmentPermissionsDispatcher.getMyLocationWithCheck(this);
+            map.setOnMarkerClickListener(this);
 
         } else {
             Toast.makeText(getActivity(), "Error - Failed to load Map", Toast.LENGTH_SHORT).show();
@@ -150,8 +154,9 @@ public class MapsFragment extends Fragment implements
         LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
 
         Marker marker = MapUtils.addMarker(map, point, title, icon);
-        MapUtils.dropPinEffect(marker);
 
+        FirebaseClient.uploadMarker(title, marker);
+        MapUtils.dropPinEffect(marker);
     }
 
     protected void startLocationUpdates() {
@@ -265,6 +270,25 @@ public class MapsFragment extends Fragment implements
 
             return false;
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Uri uri = (Uri) marker.getTag();
+        if(uri != null) {
+            PhotoPreviewFragment photoPreviewFragment = PhotoPreviewFragment.newInstance(uri);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack
+            transaction.replace(R.id.child_fragment_container, photoPreviewFragment);
+            transaction.addToBackStack(null);
+
+            // Commit the transaction
+            transaction.commit();
+
+        }
+        return true;
     }
 
 

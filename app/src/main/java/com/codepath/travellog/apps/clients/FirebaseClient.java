@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.codepath.travellog.apps.utils.PhotoUtils;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -23,12 +24,18 @@ public class FirebaseClient {
 
     static FirebaseStorage storage = FirebaseStorage.getInstance();
 
+    public static boolean downloaddMarker() {
 
-    public static boolean uploadMarker(String photoName) {
+        return true;
+
+    }
+
+    public static void uploadMarker(final String photoName, final Marker marker) {
         Uri takenPhotoUri = PhotoUtils.getPhotoFileUri(photoName);
         // Create a storage reference from our app
         StorageReference storageRef = storage.getReferenceFromUrl("gs://my-project-1478752187590.appspot.com");
-        StorageReference imagesRef = storageRef.child("marker/" + photoName);
+        final StorageReference imagesRef = storageRef.child("marker/" + photoName);
+
         try {
             InputStream stream = new FileInputStream(new File(takenPhotoUri.getPath()));
             UploadTask uploadTask = imagesRef.putStream(stream);
@@ -44,16 +51,15 @@ public class FirebaseClient {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    marker.setTag(downloadUrl);
                 }
             });
 
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return false;
         }
 
-        return true;
     }
 
 

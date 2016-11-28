@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.codepath.travellog.R;
-import com.codepath.travellog.apps.clients.FirebaseClient;
 import com.codepath.travellog.apps.fragments.LoginFragment;
 import com.codepath.travellog.apps.fragments.MapsFragment;
 import com.codepath.travellog.apps.utils.PhotoUtils;
@@ -200,10 +199,12 @@ public class HomeActivity extends AppCompatActivity {
                     mapsFragment = (MapsFragment) getSupportFragmentManager().findFragmentByTag("MapFragment");
                 }
                 String photoName = PhotoUtils.generatePhotoFileName();
-                FirebaseClient.uploadMarker(photoName);
                 Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_map);
 
                 mapsFragment.setPictureMarker(photoName, b);
+
+
+                //FirebaseClient.uploadMarker(photoName, mapsFragment, b);
 
                 Toast.makeText(this, photoName, Toast.LENGTH_LONG).show();
             }
