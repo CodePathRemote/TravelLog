@@ -57,6 +57,12 @@ Here's a walkthrough of implemented user stories: http://i.imgur.com/R3IDVQX.mp4
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
+<video width="320" height="240" controls>
+  <source src="videocapture.mp4" type="video/mp4">
+
+Your browser does not support the video tag.
+</video>
+
 ## Notes
 
 Describe any challenges encountered while building the app.
