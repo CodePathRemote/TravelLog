@@ -51,17 +51,7 @@ The following **additional** features are implemented:
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories: http://i.imgur.com/R3IDVQX.mp4
-
-<!--><img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' /> -->
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
-
-<!--><video width="320" height="240" controls>
-  <source src="videocapture.mp4" type="video/mp4">
-
-Your browser does not support the video tag.
-</video>-->
+[Link to Video Walkthrough](https://drive.google.com/file/d/0BxTH0SyaukKPWGtlYXdLcTQyQ1U/view?usp=sharing)
 
 ## Notes
 
