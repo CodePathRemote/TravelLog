@@ -10,7 +10,8 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 * [ ] When our app is initialized and in the loading stage, a **logo screen** will be shown to user before redirected to login page. 
-* [ ]	User can **sign in to Facebook** using OAuth login
+* [X]	User can **sign in to Facebook** using OAuth login
+* [X]	User can **persist information to Firebase**
 * [X]	User can **view map view of the current trip** after user login
   * [X] User is displayed with the map view of the current trip.
   * [X] User is given a bottom navigation bar which displays the main functionalities such as taking Photos and Notes, tracking Budget and using a CarService (More on them in the next sections)
