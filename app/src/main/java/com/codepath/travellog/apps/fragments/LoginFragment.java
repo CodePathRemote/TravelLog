@@ -83,7 +83,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    onLoginUpdatedListener.saveLoginInfo(user);
+                    //onLoginUpdatedListener.saveLoginInfo(user);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment implements  View.OnClickListener{
         super.onAttach(context);
         if (context instanceof LoginActivity) {
             try {
-                onLoginUpdatedListener = (onLoginUpdatedListener) context;
+               // onLoginUpdatedListener = (onLoginUpdatedListener) context;
             } catch (ClassCastException e) {
                 throw new ClassCastException(context.toString() + "is not main activity");
             }

@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.codepath.travellog.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,16 +53,22 @@ public class PhotoPreviewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            uri = getArguments().getParcelable(ARG_PARAM1);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_photo_preview, container, false);
+        View v = inflater.inflate(R.layout.fragment_photo_preview, container, false);
+        if (getArguments() != null) {
+            uri = getArguments().getParcelable(ARG_PARAM1);
+            ImageView imageView = (ImageView) v.findViewById(R.id.imagePreview);
+            Picasso.with(getContext()).load(uri.toString()).into(imageView);
+
+        }
+
+        return v;
     }
 
 

@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.codepath.travellog.R;
 import com.codepath.travellog.apps.fragments.LoginFragment;
@@ -194,7 +193,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if(resultCode == RESULT_OK) {
-                // Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
                 if (mapsFragment == null) {
                     mapsFragment = (MapsFragment) getSupportFragmentManager().findFragmentByTag("MapFragment");
                 }
@@ -203,11 +201,7 @@ public class HomeActivity extends AppCompatActivity {
                 Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.ic_map);
 
                 mapsFragment.setPictureMarker(photoName, b);
-
-
-                //FirebaseClient.uploadMarker(photoName, mapsFragment, b);
-
-                Toast.makeText(this, photoName, Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, photoName, Toast.LENGTH_LONG).show();
             }
         }
     }
