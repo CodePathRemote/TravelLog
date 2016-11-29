@@ -32,6 +32,7 @@ public class FirebaseClient {
 
     public static void uploadMarker(final String photoName, final Marker marker) {
         Uri takenPhotoUri = PhotoUtils.getPhotoFileUri(photoName);
+        marker.setTag(takenPhotoUri);
         // Create a storage reference from our app
         StorageReference storageRef = storage.getReferenceFromUrl("gs://my-project-1478752187590.appspot.com");
         final StorageReference imagesRef = storageRef.child("marker/" + photoName);

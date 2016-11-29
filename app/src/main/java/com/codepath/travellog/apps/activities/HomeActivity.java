@@ -194,7 +194,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if(resultCode == RESULT_OK) {
-                // Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
                 if (mapsFragment == null) {
                     mapsFragment = (MapsFragment) getSupportFragmentManager().findFragmentByTag("MapFragment");
                 }
