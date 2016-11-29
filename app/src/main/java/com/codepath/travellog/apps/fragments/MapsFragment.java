@@ -136,17 +136,6 @@ public class MapsFragment extends Fragment implements
 
     }
 
-    public void setPictureMarker(String title, String photoFilePath){
-        BitmapDescriptor icon = MapUtils.createPictureBubble(getActivity(), photoFilePath);
-        //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
-        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
-
-        Marker marker = MapUtils.addMarker(map, point, title, icon);
-        MapUtils.dropPinEffect(marker);
-
-    }
-
     public void setPictureMarker(String title, Bitmap bitmap){
         BitmapDescriptor icon = MapUtils.createPictureBubble(getActivity(), bitmap);
         //Toast.makeText(this, "GPS location was found!", Toast.LENGTH_SHORT).show();
@@ -155,7 +144,7 @@ public class MapsFragment extends Fragment implements
 
         Marker marker = MapUtils.addMarker(map, point, title, icon);
 
-        FirebaseClient.uploadMarker(title, marker);
+        FirebaseClient.uploadMarker(title, marker, getUserId());
         MapUtils.dropPinEffect(marker);
     }
 
@@ -316,5 +305,7 @@ public class MapsFragment extends Fragment implements
         }
     }
 
-
+    private String getUserId() {
+        return this.getActivity().getSharedPreferences("Login", 0).getString("UserId", "");
+    }
 }

@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
+import java.util.UUID;
 
 /**
  * Created by lixudong on 11/13/16.
@@ -24,7 +25,7 @@ public class PhotoUtils {
     }
 
     public static String generatePhotoFileName(String userId) {
-        return userId + "_photo.jpg";
+        return userId + "_" + UUID.randomUUID().toString() +  "_photo.jpg";
     }
 
 }
